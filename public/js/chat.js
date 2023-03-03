@@ -32,7 +32,7 @@ $userForm.addEventListener('submit', (e) => {
 socket.on('message', (message) => {
     element = document.createElement('pre')
     element.setAttribute('id', 'newMessage')
-    msgTxt = document.createTextNode(`[${localStorage.getItem("user")}]`+message)
+    msgTxt = document.createTextNode(`[${localStorage.getItem("user")}] `+message)
     element.appendChild(msgTxt)
     $messages.appendChild(element)
 })

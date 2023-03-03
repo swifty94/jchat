@@ -15,11 +15,13 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', (socket) => {
     let user = socket.conn.id
     let count = socket.conn.server.clientsCount
+    let client;
 
     socket.on('createUser', (username, callback) => {
         socket.emit('welcomeMessage', `Welcome! ${username}`)
         socket.broadcast.emit('message', `User ${username} has joined!`)
         socket.broadcast.emit('message', `Online users - ${count}`)
+        client = username;
     })
 
     socket.on('sendMessage', (message, callback) => {
@@ -28,7 +30,7 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', `User_${user} has left!`);
+        io.emit('message', `${client} has left!`);
         io.emit('message', `Online users - ${--count}`)
     })
 })
