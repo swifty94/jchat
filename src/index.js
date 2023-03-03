@@ -15,13 +15,15 @@ app.use(express.static(publicDirectoryPath))
 io.on('connection', (socket) => {
     let user = socket.conn.id
     let count = socket.conn.server.clientsCount
-    let userAddress = socket.conn.remoteAddress
-    socket.emit('welcomeMessage', `Your unique ID is - ${user}`)
-    socket.broadcast.emit('message', `UserID ${user} has joined! IP: ${userAddress}`)
-    socket.broadcast.emit('message', `Online users - ${count}`)
+
+    socket.on('createUser', (username, callback) => {
+        socket.emit('welcomeMessage', `Welcome! ${username}`)
+        socket.broadcast.emit('message', `User ${username} has joined!`)
+        socket.broadcast.emit('message', `Online users - ${count}`)
+    })
 
     socket.on('sendMessage', (message, callback) => {
-        io.emit('message', `[${user}]: ${message}`);
+        io.emit('message', `${message}`);
         callback();
     })
 
