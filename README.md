@@ -9,11 +9,11 @@ Current, very simple chat application
 ---
 - Screenshot:
 
-![](https://github.com/swifty94/nodejs-course/blob/master/chat-app/demo.png)
+![](https://github.com/swifty94/jchat/blob/master/demo.png)
 
 - Gif:
 
-![](https://github.com/swifty94/nodejs-course/blob/master/chat-app/demo.gif)
+![](https://github.com/swifty94/jchat/blob/master/demo.gif)
 
 
 TODO for v1:
