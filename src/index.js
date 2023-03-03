@@ -18,14 +18,14 @@ io.on('connection', (socket) => {
     let client;
 
     socket.on('createUser', (username, callback) => {
-        socket.emit('welcomeMessage', `Welcome! ${username}`)
+        socket.emit('welcomeMessage', username)
         socket.broadcast.emit('message', `User ${username} has joined!`)
         socket.broadcast.emit('message', `Online users - ${count}`)
         client = username;
     })
 
     socket.on('sendMessage', (message, callback) => {
-        io.emit('message', `${message}`);
+        io.emit('message', `[${client}] ${message}`);
         callback();
     })
 

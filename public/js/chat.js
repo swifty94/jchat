@@ -13,6 +13,7 @@ const $userFormInput = $messageForm.querySelector('#userTxt');
 const $messages = document.querySelector('#messages');
 const $content = document.querySelector('#content');
 const $footer = document.querySelector('#footer');
+const $greet = document.querySelector('#greet');
 const sticky = $footer.offsetBottom
 
 $userForm.addEventListener('submit', (e) => {
@@ -20,26 +21,24 @@ $userForm.addEventListener('submit', (e) => {
     $userFormButton.setAttribute('disabled', 'disabled')
     const username = e.target.elements.username.value;
     $userForm.style.display = 'none';
+    document.querySelector('#greet').style.display = 'block';
     $messageForm.style.display = 'block';
-    socket.emit('createUser', username, (error) => {
-        // $userFormButton.removeAttribute('disabled');
-        // $userFormInput.value = '';
-    })
-    window.localStorage.setItem('user', username);
-    console.log(`UserCreated ${username} and saved to local storage`)
+    socket.emit('createUser', username, (error) => {})
+    console.log(`UserCreated ${username}`)
+    $messages.style.display = 'block';
 })
 
 socket.on('message', (message) => {
     element = document.createElement('pre')
     element.setAttribute('id', 'newMessage')
-    msgTxt = document.createTextNode(`[${localStorage.getItem("user")}] `+message)
+    msgTxt = document.createTextNode(message)
     element.appendChild(msgTxt)
     $messages.appendChild(element)
 })
 
 socket.on('welcomeMessage', (message) => {
     element = document.createElement('p');
-    element.setAttribute('id', 'welcomeMessage');
+    element.setAttribute('id', 'username');
     msgTxt = document.createTextNode(message)
     element.appendChild(msgTxt);
     $messageForm.appendChild(element);
@@ -60,8 +59,7 @@ $messageForm.addEventListener('submit', (e) => {
         if (error) {
             return console.log(error)
         }
-
-        console.log('Message delivered!', message)
+        console.log('Message: ', message)
     })
 })
 
