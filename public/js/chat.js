@@ -17,22 +17,22 @@ const $greet = document.querySelector('#greet');
 const sticky = $footer.offsetBottom
 
 $userForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    $userFormButton.setAttribute('disabled', 'disabled')
+    e.preventDefault();
+    $userFormButton.setAttribute('disabled', 'disabled');
     const username = e.target.elements.username.value;
     $userForm.style.display = 'none';
     document.querySelector('#greet').style.display = 'block';
     $messageForm.style.display = 'block';
-    socket.emit('createUser', username, (error) => {})
-    console.log(`UserCreated ${username}`)
+    socket.emit('createUser', username, (error) => {});
+    console.log(`UserCreated ${username}`);
     $messages.style.display = 'block';
 })
 
 socket.on('message', (message) => {
-    element = document.createElement('pre')
-    element.setAttribute('id', 'newMessage')
-    msgTxt = document.createTextNode(message)
-    element.appendChild(msgTxt)
+    element = document.createElement('p');
+    element.setAttribute('id', 'newMessage');
+    msgTxt = document.createTextNode(message);
+    element.appendChild(msgTxt);
     $messages.appendChild(element)
 })
 

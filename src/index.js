@@ -13,7 +13,6 @@ const publicDirectoryPath = path.join(__dirname, '../public')
 app.use(express.static(publicDirectoryPath))
 
 io.on('connection', (socket) => {
-    let user = socket.conn.id
     let count = socket.conn.server.clientsCount
     let client;
 
@@ -22,6 +21,7 @@ io.on('connection', (socket) => {
         socket.broadcast.emit('message', `User ${username} has joined!`)
         socket.broadcast.emit('message', `Online users - ${count}`)
         client = username;
+        callback();
     })
 
     socket.on('sendMessage', (message, callback) => {
