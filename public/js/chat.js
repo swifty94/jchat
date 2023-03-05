@@ -1,7 +1,7 @@
 const socket = io()
-// Elements
+// Socket IO
 
-// Forms
+// Elements / Forms / Buttons
 const $messageForm = document.querySelector('#message-form');
 const $messageFormInput = $messageForm.querySelector('#sendTxt');
 const $messageFormButton = $messageForm.querySelector('#sendBtn');
@@ -15,6 +15,9 @@ const $content = document.querySelector('#content');
 const $footer = document.querySelector('#footer');
 const $greet = document.querySelector('#greet');
 const sticky = $footer.offsetBottom
+
+
+// DOM element + socket.io listeners
 
 $userForm.addEventListener('submit', (e) => {
     e.preventDefault();
