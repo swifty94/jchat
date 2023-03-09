@@ -14,7 +14,7 @@ const $messages = document.querySelector('#messages');
 const $content = document.querySelector('#content');
 const $footer = document.querySelector('#footer');
 const $greet = document.querySelector('#greet');
-const sticky = $footer.offsetBottom
+const $sticky = $footer.offsetBottom
 
 
 // DOM element + socket.io listeners
@@ -24,7 +24,7 @@ $userForm.addEventListener('submit', (e) => {
     $userFormButton.setAttribute('disabled', 'disabled');
     const username = e.target.elements.username.value;
     $userForm.style.display = 'none';
-    document.querySelector('#greet').style.display = 'block';
+    $greet.style.display = 'block';
     $messageForm.style.display = 'block';
     socket.emit('createUser', username, (error) => {});
     console.log(`UserCreated ${username}`);
@@ -74,7 +74,7 @@ document.body.addEventListener('DOMSubtreeModified', function () {
 window.onscroll = function() {stickyFooter()};
 
 function stickyFooter() {
-    if (window.pageYOffset > sticky) {
+    if (window.pageYOffset > $sticky) {
         $footer.classList.add("sticky");
     } else {
         $footer.classList.remove("sticky");
