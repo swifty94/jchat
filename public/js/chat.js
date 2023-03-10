@@ -22,15 +22,25 @@ const createMessage = (elementIdName, messageTxt, elementToAppend) => {
     elementToAppend.appendChild(element);
 };
 
-$userForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+const switchToMessageForm = () => {
     $userFormButton.setAttribute('disabled', 'disabled');
-    const username = e.target.elements.username.value;
     $userForm.style.display = 'none';
     $greet.style.display = 'block';
     $messageForm.style.display = 'block';
-    socket.emit('createUser', username, (error) => {});
     $messages.style.display = 'block';
+};
+
+const enableMessageFormBack = () => {
+    $messageFormButton.removeAttribute('disabled');
+    $messageFormInput.value = '';
+    $messageFormInput.focus();
+};
+
+$userForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const username = e.target.elements.username.value;
+    switchToMessageForm();
+    socket.emit('createUser', username, (error) => {});
 })
 
 socket.on('message', (message) => {
@@ -50,9 +60,7 @@ $messageForm.addEventListener('submit', (e) => {
     $messageFormButton.setAttribute('disabled', 'disabled');
     const message = e.target.elements.message.value;
     socket.emit('sendMessage', message, (error) => {
-        $messageFormButton.removeAttribute('disabled');
-        $messageFormInput.value = '';
-        $messageFormInput.focus();
+        enableMessageFormBack();
         if (error) {
             return console.log(error);
         }
