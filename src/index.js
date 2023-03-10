@@ -21,23 +21,24 @@ const removeUser = (user, usersArray) => {
 }
 var usersArray = [];
 var isUsers = usersArray.length > 0 ? true : false;
+var usersCount = 1;
 
 io.on('connection', (socket) => {
-    let count = socket.conn.server.clientsCount
+    //let count = socket.conn.server.clientsCount
     let client;
 
     if (isUsers) {
-        io.emit('message', `Online users - ${count}`)
-        io.emit('message', `Users list - ${usersArray}`)
+        io.emit('message', `Online users - ${usersCount}`);
+        io.emit('message', `Users list - ${usersArray}`);
     }
 
     socket.on('createUser', (username, callback) => {
         client = username;
         usersArray.push(client);
-        socket.emit('welcomeMessage', username)
-        io.emit('sysMessage', `User ${username} has joined!`)
-        io.emit('sysMessage', `Online users - ${count}`)
-        io.emit('sysMessage', `Users list - ${usersArray}`)
+        socket.emit('welcomeMessage', username);
+        io.emit('sysMessage', `User ${username} has joined!`);
+        io.emit('sysMessage', `Online users - ${usersCount++}`);
+        io.emit('sysMessage', `Users list - ${usersArray}`);
         callback();
     })
 
@@ -53,7 +54,7 @@ io.on('connection', (socket) => {
         removeUser(client, usersArray);
         if (client !== undefined) {
             io.emit('sysMessage', `${client} has left!`);
-            io.emit('sysMessage', `Online users - ${--count}`)
+            io.emit('sysMessage', `Online users - ${usersArray.length}`)
             io.emit('sysMessage', `Users list - ${usersArray}`)
         }
     })

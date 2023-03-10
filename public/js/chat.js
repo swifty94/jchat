@@ -1,4 +1,4 @@
-const socket = io()
+const socket = io();
 
 const $messageForm = document.querySelector('#message-form');
 const $messageFormInput = $messageForm.querySelector('#sendTxt');
@@ -12,14 +12,14 @@ const $messages = document.querySelector('#messages');
 const $content = document.querySelector('#content');
 const $footer = document.querySelector('#footer');
 const $greet = document.querySelector('#greet');
-const $sticky = $footer.offsetBottom
+const $sticky = $footer.offsetBottom;
 
 const createMessage = (elementIdName, messageTxt, elementToAppend) => {
     element = document.createElement('p');
     element.setAttribute('id', elementIdName);
     msgTxt = document.createTextNode(messageTxt);
     element.appendChild(msgTxt);
-    elementToAppend.appendChild(element)
+    elementToAppend.appendChild(element);
 };
 
 $userForm.addEventListener('submit', (e) => {
@@ -46,15 +46,15 @@ socket.on('welcomeMessage', (message) => {
 })
 
 $messageForm.addEventListener('submit', (e) => {
-    e.preventDefault()
-    $messageFormButton.setAttribute('disabled', 'disabled')
-    const message = e.target.elements.message.value
+    e.preventDefault();
+    $messageFormButton.setAttribute('disabled', 'disabled');
+    const message = e.target.elements.message.value;
     socket.emit('sendMessage', message, (error) => {
         $messageFormButton.removeAttribute('disabled')
-        $messageFormInput.value = ''
-        $messageFormInput.focus()
+        $messageFormInput.value = '';
+        $messageFormInput.focus();
         if (error) {
-            return console.log(error)
+            return console.log(error);
         }
     })
 })
