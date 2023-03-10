@@ -21,14 +21,13 @@ const removeUser = (user, usersArray) => {
 }
 var usersArray = [];
 var isUsers = usersArray.length > 0 ? true : false;
-var usersCount = 1;
 
 io.on('connection', (socket) => {
     //let count = socket.conn.server.clientsCount
     let client;
 
     if (isUsers) {
-        io.emit('message', `Online users - ${usersCount}`);
+        io.emit('message', `Online users - ${usersArray.length}`);
         io.emit('message', `Users list - ${usersArray}`);
     }
 
@@ -37,7 +36,7 @@ io.on('connection', (socket) => {
         usersArray.push(client);
         socket.emit('welcomeMessage', username);
         io.emit('sysMessage', `User ${username} has joined!`);
-        io.emit('sysMessage', `Online users - ${usersCount++}`);
+        io.emit('sysMessage', `Online users - ${usersArray.length}`);
         io.emit('sysMessage', `Users list - ${usersArray}`);
         callback();
     })
