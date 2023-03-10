@@ -1,5 +1,5 @@
 body{
-    background-color:rgb(244 252 200);
+    background-color:rgb(255 197 28 / 36%)
 }
 
 #main {
@@ -21,6 +21,7 @@ body{
 
 p {
     text-align: left;
+    margin: 0.5%;
 }
 
 
