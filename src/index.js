@@ -22,7 +22,6 @@ var usersArray = [];
 var isUsers = usersArray.length > 0 ? true : false;
 
 io.on('connection', (socket) => {
-    //let count = socket.conn.server.clientsCount
     let client;
 
     if (isUsers) {
