@@ -8,26 +8,25 @@
             <link rel="stylesheet" type="text/css" href="./css/main.css">
         </head>
         <body>
-            <h3>Welcome to JChat application</h3>
-            <div id="content">
+            <div id="main">
+              <img id="logo" src="./img/logo.png" alt="App logo">
+              <h3 id="title">Welcome to JChat application</h3>
                 <div id="messages">
                 </div>
               </div>
               <br>
-              <br>
-              <br>
               <footer id="footer">
               <form id="user-form">
                   <p>Please create yourself a username and click Save.</p>
-                  <input id="userTxt" style='width: 50%;'name="username" placeholder="Username" required>
+                  <input id="userTxt" name="username" placeholder="Username" required>
                   <br>
                   <button id="userBtn">Save</button>
               </form>
-              <form id="message-form" style="display: none;">
-                    <input id="sendTxt" style='width: 50%;'name="message" placeholder="Message">
+              <form id="message-form">
+                    <input id="sendTxt" name="message" placeholder="Message">
                     <br>
                     <button id="sendBtn">Send</button>
-                    <div id="greet" style="display: none;">
+                    <div id="greet">
                       <p id="sysMessage">Welcome to the chat!</p>
                     </div>
                 </form>

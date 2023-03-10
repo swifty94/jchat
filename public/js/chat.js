@@ -59,9 +59,7 @@ $messageForm.addEventListener('submit', (e) => {
     })
 })
 
-document.body.addEventListener('DOMSubtreeModified', function () {
-    window.scrollTo(0, document.body.scrollHeight);
-}, false);
+document.body.addEventListener('DOMSubtreeModified', function () {window.scrollTo(0, document.body.scrollHeight);}, false);
 
 function stickyFooter() {
     if (window.pageYOffset > $sticky) {

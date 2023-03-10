@@ -1,11 +1,11 @@
 {
   "name": "jchat-app",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "Simple chat application using WebSocket and NodeJS",
   "main": "index.js",
   "scripts": {
     "start": "node src/index.js",
-    "dev": "nodemon src/index.js"
+    "dev": "nodemon src/index.js -e css,html"
   },
   "author": "",
   "license": "ISC",

@@ -9,6 +9,8 @@ const io = socketio(server)
 
 const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
+app.use(express.static(publicDirectoryPath))
+
 
 const removeUser = (user, usersArray) => {
     const userIndex = usersArray.indexOf(user);
@@ -17,11 +19,9 @@ const removeUser = (user, usersArray) => {
         return usersArray;
     }
 }
-
-app.use(express.static(publicDirectoryPath))
-
 var usersArray = [];
 var isUsers = usersArray.length > 0 ? true : false;
+
 io.on('connection', (socket) => {
     let count = socket.conn.server.clientsCount
     let client;
