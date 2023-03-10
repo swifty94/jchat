@@ -10,17 +10,33 @@ const io = socketio(server)
 const port = process.env.PORT || 3000
 const publicDirectoryPath = path.join(__dirname, '../public')
 
+const removeUser = (user, usersArray) => {
+    const userIndex = usersArray.indexOf(user);
+    if (userIndex > -1) {
+        usersArray.splice(userIndex, 1);
+        return usersArray;
+    }
+}
+
 app.use(express.static(publicDirectoryPath))
 
+var usersArray = [];
+var isUsers = usersArray.length > 0 ? true : false;
 io.on('connection', (socket) => {
     let count = socket.conn.server.clientsCount
     let client;
-    io.emit('message', `Online users - ${count}`)
+    if (isUsers) {
+        io.emit('message', `Online users - ${count}`)
+        io.emit('message', `Users list - ${usersArray}`)
+    }
 
     socket.on('createUser', (username, callback) => {
+        client = username;
+        usersArray.push(client);
         socket.emit('welcomeMessage', username)
         io.emit('message', `User ${username} has joined!`)
-        client = username;
+        io.emit('message', `Online users - ${count}`)
+        io.emit('message', `Users list - ${usersArray}`)
         callback();
     })
 
@@ -32,6 +48,8 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         io.emit('message', `${client} has left!`);
         io.emit('message', `Online users - ${--count}`)
+        removeUser(client, usersArray);
+        io.emit('message', `Users list - ${usersArray}`)
     })
 })
 
