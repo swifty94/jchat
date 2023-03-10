@@ -25,6 +25,7 @@ var isUsers = usersArray.length > 0 ? true : false;
 io.on('connection', (socket) => {
     let count = socket.conn.server.clientsCount
     let client;
+
     if (isUsers) {
         io.emit('message', `Online users - ${count}`)
         io.emit('message', `Users list - ${usersArray}`)
@@ -41,16 +42,18 @@ io.on('connection', (socket) => {
     })
 
     socket.on('sendMessage', (message, callback) => {
-        io.emit('message', `[${client}] ${message}`);
+        var dateObject = new Date();
+        var time = dateObject.getHours() + ':' + dateObject.getMinutes() + ':' + dateObject.getSeconds();
+
+        io.emit('message', `[${time}] [${client}] ${message}`);
         callback();
     })
 
     socket.on('disconnect', () => {
-        realClient = client !== 'undefined' ? false : true;
-        if (realClient) {
+        removeUser(client, usersArray);
+        if (client !== undefined) {
             io.emit('sysMessage', `${client} has left!`);
             io.emit('sysMessage', `Online users - ${--count}`)
-            removeUser(client, usersArray);
             io.emit('sysMessage', `Users list - ${usersArray}`)
         }
     })

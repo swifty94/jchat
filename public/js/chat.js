@@ -1,7 +1,5 @@
 const socket = io()
-// Socket IO
 
-// Elements / Forms / Buttons
 const $messageForm = document.querySelector('#message-form');
 const $messageFormInput = $messageForm.querySelector('#sendTxt');
 const $messageFormButton = $messageForm.querySelector('#sendBtn');
@@ -16,8 +14,13 @@ const $footer = document.querySelector('#footer');
 const $greet = document.querySelector('#greet');
 const $sticky = $footer.offsetBottom
 
-
-// DOM element + socket.io listeners
+const createMessage = (elementIdName, messageTxt, elementToAppend) => {
+    element = document.createElement('p');
+    element.setAttribute('id', elementIdName);
+    msgTxt = document.createTextNode(messageTxt);
+    element.appendChild(msgTxt);
+    elementToAppend.appendChild(element)
+};
 
 $userForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -27,59 +30,38 @@ $userForm.addEventListener('submit', (e) => {
     $greet.style.display = 'block';
     $messageForm.style.display = 'block';
     socket.emit('createUser', username, (error) => {});
-    console.log(`UserCreated ${username}`);
     $messages.style.display = 'block';
 })
 
 socket.on('message', (message) => {
-    element = document.createElement('p');
-    element.setAttribute('id', 'newMessage');
-    msgTxt = document.createTextNode(message);
-    element.appendChild(msgTxt);
-    $messages.appendChild(element)
+    createMessage('newMessage', message, $messages);
 })
 
 socket.on('sysMessage', (message) => {
-    element = document.createElement('p');
-    element.setAttribute('id', 'sysMessage');
-    msgTxt = document.createTextNode(message);
-    element.appendChild(msgTxt);
-    $messages.appendChild(element)
+    createMessage('sysMessage', message, $messages);
 })
 
 socket.on('welcomeMessage', (message) => {
-    element = document.createElement('p');
-    element.setAttribute('id', 'sysMessage');
-    msgTxt = document.createTextNode(message)
-    element.appendChild(msgTxt);
-    $messageForm.appendChild(element);
+    createMessage('sysMessage', message, $messageForm);
 })
 
 $messageForm.addEventListener('submit', (e) => {
     e.preventDefault()
-
     $messageFormButton.setAttribute('disabled', 'disabled')
-
     const message = e.target.elements.message.value
-
     socket.emit('sendMessage', message, (error) => {
         $messageFormButton.removeAttribute('disabled')
         $messageFormInput.value = ''
         $messageFormInput.focus()
-
         if (error) {
             return console.log(error)
         }
-        console.log('Message: ', message)
     })
 })
 
-// Sticky footer stuff
 document.body.addEventListener('DOMSubtreeModified', function () {
     window.scrollTo(0, document.body.scrollHeight);
 }, false);
-
-window.onscroll = function() {stickyFooter()};
 
 function stickyFooter() {
     if (window.pageYOffset > $sticky) {
@@ -88,3 +70,5 @@ function stickyFooter() {
         $footer.classList.remove("sticky");
     }
 }
+
+window.onscroll = function() {stickyFooter()};
