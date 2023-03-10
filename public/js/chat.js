@@ -39,9 +39,17 @@ socket.on('message', (message) => {
     $messages.appendChild(element)
 })
 
+socket.on('sysMessage', (message) => {
+    element = document.createElement('p');
+    element.setAttribute('id', 'sysMessage');
+    msgTxt = document.createTextNode(message);
+    element.appendChild(msgTxt);
+    $messages.appendChild(element)
+})
+
 socket.on('welcomeMessage', (message) => {
     element = document.createElement('p');
-    element.setAttribute('id', 'username');
+    element.setAttribute('id', 'sysMessage');
     msgTxt = document.createTextNode(message)
     element.appendChild(msgTxt);
     $messageForm.appendChild(element);

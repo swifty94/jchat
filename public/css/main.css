@@ -14,7 +14,13 @@ h3 {
 #newMessage {
     width: 50%;
     margin-left: 0;
-    background-color: rgb(210, 255, 213);
+    background-color: rgb(190, 251, 194);
+}
+
+#sysMessage {
+    width: 50%;
+    margin-left: 0;
+    background-color: rgb(205, 235, 253);
 }
 
 #userForm {

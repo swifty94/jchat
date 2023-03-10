@@ -34,9 +34,9 @@ io.on('connection', (socket) => {
         client = username;
         usersArray.push(client);
         socket.emit('welcomeMessage', username)
-        io.emit('message', `User ${username} has joined!`)
-        io.emit('message', `Online users - ${count}`)
-        io.emit('message', `Users list - ${usersArray}`)
+        io.emit('sysMessage', `User ${username} has joined!`)
+        io.emit('sysMessage', `Online users - ${count}`)
+        io.emit('sysMessage', `Users list - ${usersArray}`)
         callback();
     })
 
@@ -46,10 +46,13 @@ io.on('connection', (socket) => {
     })
 
     socket.on('disconnect', () => {
-        io.emit('message', `${client} has left!`);
-        io.emit('message', `Online users - ${--count}`)
-        removeUser(client, usersArray);
-        io.emit('message', `Users list - ${usersArray}`)
+        realClient = client !== 'undefined' ? false : true;
+        if (realClient) {
+            io.emit('sysMessage', `${client} has left!`);
+            io.emit('sysMessage', `Online users - ${--count}`)
+            removeUser(client, usersArray);
+            io.emit('sysMessage', `Users list - ${usersArray}`)
+        }
     })
 })
 
