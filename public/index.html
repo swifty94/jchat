@@ -1,37 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-        <head>
-            <title>JChat</title>
-            <meta charset="UTF-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
-            <link rel="stylesheet" type="text/css" href="./css/main.css">
-        </head>
-        <body>
-            <div id="main">
-              <img id="logo" src="./img/logo.png" alt="App logo">
-              <h3 id="title">Welcome to JChat application</h3>
-                <div id="messages">
-                </div>
-              </div>
-              <br>
-              <footer id="footer">
-              <form id="user-form">
-                  <p>Please create yourself a username and click Save.</p>
-                  <input id="userTxt" name="username" placeholder="Username" required>
-                  <br>
-                  <button id="userBtn">Save</button>
-              </form>
-              <form id="message-form">
-                    <input id="sendTxt" name="message" placeholder="Message">
-                    <br>
-                    <button id="sendBtn">Send</button>
-                    <div id="greet">
-                      <p id="sysMessage">Welcome to the chat!</p>
-                    </div>
-                </form>
-              </footer>
-        </body>
-        <script src="/socket.io/socket.io.js"></script>
-        <script src="/js/chat.js"></script>
+  <head>
+      <title>JChat</title>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+      <link rel="stylesheet" type="text/css" href="./css/main.css">
+  </head>
+  <body>
+    <div id="main">
+      <img id="logo" src="./img/logo.png" alt="App logo">
+      <h3 id="title">Welcome to JChat application</h3>
+      <div id="messages"></div>
+    </div>
+    <br>
+    <footer id="footer">
+      <form id="user-form">
+        <p>Please create yourself a username and click Save.</p>
+        <input id="userTxt" name="username" placeholder="Username" required>
+        <br>
+        <button id="userBtn">Save</button>
+      </form>
+      <form id="message-form">
+        <input id="sendTxt" name="message" placeholder="Message">
+        <br>
+        <button id="sendBtn">Send</button>
+        <div id="greet">
+          <p id="sysMessage">Welcome to the chat!</p>
+        </div>
+      </form>
+    </footer>
+  </body>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="/js/chat.js"></script>
  </html>

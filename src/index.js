@@ -1,16 +1,15 @@
-const path = require('path')
-const http = require('http')
-const express = require('express')
-const socketio = require('socket.io')
+const path = require('path');
+const http = require('http');
+const express = require('express');
+const socketio = require('socket.io');
 
-const app = express()
-const server = http.createServer(app)
-const io = socketio(server)
+const app = express();
+const server = http.createServer(app);
+const io = socketio(server);
 
-const port = process.env.PORT || 3000
-const publicDirectoryPath = path.join(__dirname, '../public')
-app.use(express.static(publicDirectoryPath))
-
+const port = process.env.PORT || 3000;
+const publicDirectoryPath = path.join(__dirname, '../public');
+app.use(express.static(publicDirectoryPath));
 
 const removeUser = (user, usersArray) => {
     const userIndex = usersArray.indexOf(user);
@@ -53,12 +52,12 @@ io.on('connection', (socket) => {
         removeUser(client, usersArray);
         if (client !== undefined) {
             io.emit('sysMessage', `${client} has left!`);
-            io.emit('sysMessage', `Online users - ${usersArray.length}`)
-            io.emit('sysMessage', `Users list - ${usersArray}`)
+            io.emit('sysMessage', `Online users - ${usersArray.length}`);
+            io.emit('sysMessage', `Users list - ${usersArray}`);
         }
     })
 })
 
 server.listen(port, () => {
-    console.log(`Server is up on port ${port}!`)
+    console.log(`Server is up on port ${port}!`);
 })
