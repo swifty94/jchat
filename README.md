@@ -1,4 +1,5 @@
-Simple chat application
+JChat
+---
 ---
 Description:
 ---
