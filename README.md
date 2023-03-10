@@ -10,15 +10,15 @@ v 1.0.0 Single room chat for everyone
 
 Demo
 ---
-![](https://github.com/swifty94/jchat/blob/master/demo_1.png)
+![](https://github.com/swifty94/jchat/blob/master/demo/demo_1.png)
 
-![](https://github.com/swifty94/jchat/blob/master/demo_2.png)
+![](https://github.com/swifty94/jchat/blob/master/demo/demo_2.png)
 
-![](https://github.com/swifty94/jchat/blob/master/demo_3.png)
+![](https://github.com/swifty94/jchat/blob/master/demo/demo_3.png)
 
-![](https://github.com/swifty94/jchat/blob/master/demo_4.png)
+![](https://github.com/swifty94/jchat/blob/master/demo/demo_4.png)
 
-![](https://github.com/swifty94/jchat/blob/master/demo_5.png)
+![](https://github.com/swifty94/jchat/blob/master/demo/demo_5.png)
 
 TODO for v2.0.0:
 ---
